@@ -1,0 +1,265 @@
+ {{-- @php
+     $prefix = Request::route()->getPrefix();
+     $route = Route::current()->getName();
+
+ @endphp --}}
+
+
+ <aside class="main-sidebar">
+     <!-- sidebar-->
+     <section class="sidebar">
+
+         <div class="user-profile">
+             <div class="ulogo">
+                 <a href="index.html">
+                     <!-- logo for regular state and mobile devices -->
+                     <div class="d-flex align-items-center justify-content-center">
+                         <img src="{{ asset('backend/images/logo-dark.png') }}" alt="">
+                         <h3><b>Mukhebi </b> Admin</h3>
+                     </div>
+                 </a>
+             </div>
+         </div>
+
+         <!-- sidebar menu-->
+         <ul class="sidebar-menu" data-widget="tree">
+
+             <li class="">
+                 {{-- {{ $route == 'dashboard' ? 'active' : '' }} --}}
+                 <a href="">
+                     <i data-feather="pie-chart"></i>
+                     <span>Dashboard</span>
+                     {{-- {{ route('dashboard') }} --}}
+                 </a>
+             </li>
+
+             {{-- @if (Auth::user()->role == 'Admin') --}}
+             <li class="treeview  ">
+                 {{-- {{ $prefix == '/users' ? 'active' : '' }} --}}
+                 <a href="#">
+                     <i data-feather="message-circle"></i>
+                     <span>Manage User</span>
+                     <span class="pull-right-container">
+                         <i class="fa fa-angle-right pull-right"></i>
+                     </span>
+                 </a>
+                 <ul class="treeview-menu">
+                     <li><a href="{{ route('users.view') }}"><i class="ti-more"></i>View User</a></li>
+                     <li><a href="{{ route('users.add') }}"><i class="ti-more"></i>Add User</a></li>
+                     
+                 </ul>
+             </li>
+             {{-- @endif --}}
+
+             <li class="treeview }">
+                 {{-- {{ $prefix == '/profile' ? 'active' : '' } --}}
+                 <a href="#">
+                     <i data-feather="grid"></i> <span>Manage Profile</span>
+                     <span class="pull-right-container">
+                         <i class="fa fa-angle-right pull-right"></i>
+                     </span>
+                 </a>
+                 <ul class="treeview-menu">
+                     <li><a href=""><i class="ti-more"></i>Your Profile</a></li>
+                     {{-- {{ route('profile.view') }} --}}
+                     <li><a href=""><i class="ti-more"></i>Change Password</a></li>
+                     {{-- {{ route('password.view') }} --}}
+
+                 </ul>
+             </li>
+
+
+             <li class="treeview ">
+                 {{-- {{ $prefix == '/setups' ? 'active' : '' }} --}}
+                 <a href="#">
+                     <i data-feather="credit-card"></i> <span>Setup Management</span>
+                     <span class="pull-right-container">
+                         <i class="fa fa-angle-right pull-right"></i>
+                     </span>
+                 </a>
+                 <ul class="treeview-menu">
+                     <li><a href=""><i class="ti-more"></i>Student Year</a></li>
+                     <li><a href=""><i class="ti-more"></i>Student Group</a></li>
+                     <li><a href=""><i class="ti-more"></i>Student Shift</a></li>
+                     <li><a href=""><i class="ti-more"></i>Fee Category</a></li>
+                     <li><a href=""><i class="ti-more"></i>Fee Category Amount</a></li>
+                     <li><a href=""><i class="ti-more"></i>Examp Type</a></li>
+
+
+                     {{-- <li><a href="{{ route('student.class.view') }}"><i class="ti-more"></i>Student Class</a></li>
+                     <li><a href="{{ route('student.year.view') }}"><i class="ti-more"></i>Student Year</a></li>
+                     <li><a href="{{ route('student.group.view') }}"><i class="ti-more"></i>Student Group</a></li>
+                     <li><a href="{{ route('student.shift.view') }}"><i class="ti-more"></i>Student Shift</a></li>
+                     <li><a href="{{ route('fee.category.view') }}"><i class="ti-more"></i>Fee Category</a></li>
+                     <li><a href="{{ route('fee.amount.view') }}"><i class="ti-more"></i>Fee Category Amount</a></li>
+                     <li><a href="{{ route('exam.type.view') }}"><i class="ti-more"></i>Exam Type</a></li>
+                     <li><a href="{{ route('school.subject.view') }}"><i class="ti-more"></i>School Subject</a></li>
+                     <li><a href="{{ route('assign.subject.view') }}"><i class="ti-more"></i>Assign Subject</a></li>
+                     <li><a href="{{ route('designation.view') }}"><i class="ti-more"></i>Designation </a></li> --}}
+
+
+                 </ul>
+             </li>
+
+
+             <li class="treeview ">
+                 {{-- {{ $prefix == '/students' ? 'active' : '' }} --}}
+                 <a href="#">
+                     <i data-feather="hard-drive"></i></i> <span>Student Management</span>
+                     <span class="pull-right-container">
+                         <i class="fa fa-angle-right pull-right"></i>
+                     </span>
+                 </a>
+                 <ul class="treeview-menu">
+                     <li><a href=""><i class="ti-more"></i>Student
+                             Registration</a></li>
+                     {{-- {{ route('student.registration.view') }} --}}
+
+                     <li><a href=""><i class="ti-more"></i>Roll Generate</a></li>
+                     {{-- {{ route('roll.generate.view') }} --}}
+                     <li><a href=""><i class="ti-more"></i>Registration Fee </a>
+                         {{-- {{ route('registration.fee.view') }} --}}
+                     </li>
+                     <li><a href=""><i class="ti-more"></i>Monthly Fee </a></li>
+                     {{-- {{ route('monthly.fee.view') }} --}}
+                     <li><a href=""><i class="ti-more"></i>Exam Fee </a></li>
+                     {{-- {{ route('exam.fee.view') }} --}}
+
+                 </ul>
+             </li>
+
+
+             <li class="treeview ">
+                 {{-- {{ $prefix == '/employees' ? 'active' : '' }} --}}
+                 <a href="#">
+                     <i data-feather="package"></i> <span>Employee Management</span>
+                     <span class="pull-right-container">
+                         <i class="fa fa-angle-right pull-right"></i>
+                     </span>
+                 </a>
+                 <ul class="treeview-menu">
+                     <li class=""><a href=""><i class="ti-more"></i>Employee
+                             Registration</a></li>
+                     {{-- {{ $route == 'employee.registration.view' ? 'active' : '' }} --}}
+                     {{-- {{ route('employee.registration.view') }} --}}
+
+                     <li class=""><a href=""><i class="ti-more"></i>Employee Salary</a></li>
+                     {{-- {{ $route == 'employee.salary.view' ? 'active' : '' }} --}}
+                     {{-- {{ route('employee.salary.view') }} --}}
+
+                     <li><a href=""><i class="ti-more"></i>Employee Leave</a></li>
+                     {{-- {{ route('employee.leave.view') }} --}}
+                     <li><a href=""><i class="ti-more"></i>Employee
+                             Attendance</a></li>
+                     {{-- {{ route('employee.attendance.view') }} --}}
+                     <li><a href=""><i class="ti-more"></i>Employee Monthly
+                             Salary</a></li>
+                     {{-- {{ route('employee.monthly.salary') }} --}}
+
+                 </ul>
+             </li>
+
+
+             <li class="treeview ">
+                 {{-- {{ $prefix == '/marks' ? 'active' : '' }} --}}
+                 <a href="#">
+                     <i data-feather="edit-2"></i> <span> Marks Management</span>
+                     <span class="pull-right-container">
+                         <i class="fa fa-angle-right pull-right"></i>
+                     </span>
+                 </a>
+                 <ul class="treeview-menu">
+                     <li class=""><a href=""><i class="ti-more"></i>Marks Entry</a></li>
+                     {{-- {{ $route == 'marks.entry.add' ? 'active' : '' }} --}}
+                     {{-- {{ route('marks.entry.add') }} --}}
+                     <li class=""><a href=""><i class="ti-more"></i>Marks Edit</a></li>
+                     {{-- {{ $route == 'marks.entry.edit' ? 'active' : '' }} --}}
+                     {{-- {{ route('marks.entry.edit') }} --}}
+
+                     <li class=""><a href=""><i class="ti-more"></i>Marks Grade</a></li>
+                     {{-- {{ $route == 'marks.entry.grade' ? 'active' : '' }} --}}
+                     {{-- {{ route('marks.entry.grade') }} --}}
+
+                 </ul>
+             </li>
+
+             <li class="treeview ">
+                 {{-- {{ $prefix == '/accounts' ? 'active' : '' }} --}}
+                 <a href="#">
+                     <i data-feather="inbox"></i> <span> Accounts Management</span>
+                     <span class="pull-right-container">
+                         <i class="fa fa-angle-right pull-right"></i>
+                     </span>
+                 </a>
+                 <ul class="treeview-menu">
+                     <li class=""><a href=""><i class="ti-more"></i>Student Fee</a></li>
+                     {{-- {{ $route == 'student.fee.view' ? 'active' : '' }} --}}
+                     {{-- {{ route('student.fee.view') }} --}}
+                     <li class=""><a href=""><i class="ti-more"></i>Employee Salary</a>
+                     </li>
+                     {{-- {{ $route == 'account.salary.view' ? 'active' : '' }} --}}
+                     {{-- {{ route('account.salary.view') }} --}}
+
+                     <li class=""><a href=""><i class="ti-more"></i>Other Cost</a></li>
+                     {{-- {{ $route == 'other.cost.view' ? 'active' : '' }} --}}
+                     {{-- {{ route('other.cost.view') }} --}}
+
+
+                 </ul>
+             </li>
+
+
+             <li class="header nav-small-cap">Report Interface</li>
+
+             <li class="treeview ">
+                 {{-- {{ $prefix == '/reports' ? 'active' : '' }} --}}
+                 <a href="#">
+                     <i data-feather="server"></i></i> <span> Reports Management</span>
+                     <span class="pull-right-container">
+                         <i class="fa fa-angle-right pull-right"></i>
+                     </span>
+                 </a>
+                 <ul class="treeview-menu">
+                     <li class=""><a href=""><i class="ti-more"></i>Monthly-Yearly
+                             Profite</a></li>
+                     {{-- {{ $route == 'monthly.profit.view' ? 'active' : '' }} --}}
+                     {{-- {{ route('monthly.profit.view') }} --}}
+
+                     <li class=""><a href=""><i class="ti-more"></i>MarkSheet Generate</a></li>
+                     {{-- {{ $route == 'marksheet.generate.view' ? 'active' : '' }} --}}
+                     {{-- {{ route('marksheet.generate.view') }} --}}
+
+                     <li class="}"><a href=""><i class="ti-more"></i>Attendance
+                             Report</a></li>
+                     {{-- {{ $route == 'attendance.report.view' ? 'active' : '' } --}}
+                     {{-- {{ route('attendance.report.view') }} --}}
+
+                     <li class=""><a href=""><i class="ti-more"></i>Student Result </a>
+                     </li>
+                     {{-- {{ $route == 'student.result.view' ? 'active' : '' }} --}}
+                     {{-- {{ route('student.result.view') }} --}}
+
+                     <li class=""><a href="}"><i class="ti-more"></i>Student ID Card </a>
+                     </li>
+                     {{-- {{ $route == 'student.idcard.view' ? 'active' : '' }} --}}
+                     {{-- {{ route('student.idcard.view') } --}}
+
+
+                 </ul>
+             </li>
+
+         </ul>
+     </section>
+
+     <div class="sidebar-footer">
+         <!-- item-->
+         <a href="javascript:void(0)" class="link" data-toggle="tooltip" title=""
+             data-original-title="Settings" aria-describedby="tooltip92529"><i class="ti-settings"></i></a>
+         <!-- item-->
+         <a href="mailbox_inbox.html" class="link" data-toggle="tooltip" title=""
+             data-original-title="Email"><i class="ti-email"></i></a>
+         <!-- item-->
+         <a href="javascript:void(0)" class="link" data-toggle="tooltip" title=""
+             data-original-title="Logout"><i class="ti-lock"></i></a>
+     </div>
+ </aside>
