@@ -1,5 +1,6 @@
 @extends('admin.admin_master')
 @section('admin')
+@section('title', 'View Users Tuxton System ')
     <div class="content-wrapper">
         <div class="container-full">
             <!-- Content Header (Page header) -->

@@ -1,8 +1,10 @@
- {{-- @php
+ {{-- Admin and User Priviledges modules in the sidebar to be accessed by Users and Admin (Roles)  --}}
+
+ @php
      $prefix = Request::route()->getPrefix();
      $route = Route::current()->getName();
-
- @endphp --}}
+     
+ @endphp
 
 
  <aside class="main-sidebar">
@@ -15,7 +17,7 @@
                      <!-- logo for regular state and mobile devices -->
                      <div class="d-flex align-items-center justify-content-center">
                          <img src="{{ asset('backend/images/logo-dark.png') }}" alt="">
-                         <h3><b>Mukhebi </b> Admin</h3>
+                         <h3><b>Tuxton </b> Mukhebi</h3>
                      </div>
                  </a>
              </div>
@@ -23,20 +25,19 @@
 
          <!-- sidebar menu-->
          <ul class="sidebar-menu" data-widget="tree">
-
-             <li class="">
-                 {{-- {{ $route == 'dashboard' ? 'active' : '' }} --}}
-                 <a href="">
+             <li class="{{ $route == 'dashboard' ? 'active' : '' }}">
+                 <a href="{{ route('dashboard') }}">
                      <i data-feather="pie-chart"></i>
                      <span>Dashboard</span>
-                     {{-- {{ route('dashboard') }} --}}
                  </a>
              </li>
 
              {{-- @if (Auth::user()->role == 'Admin') --}}
-             <li class="treeview  ">
-                 {{-- {{ $prefix == '/users' ? 'active' : '' }} --}}
-                 <a href="#">
+
+             {{-- fetch only the users from the users web route to be active and display it as active --}}
+             <li class="treeview {{ $prefix == '/users' ? 'active' : '' }}">
+
+                 <a href="">
                      <i data-feather="message-circle"></i>
                      <span>Manage User</span>
                      <span class="pull-right-container">
@@ -46,13 +47,14 @@
                  <ul class="treeview-menu">
                      <li><a href="{{ route('users.view') }}"><i class="ti-more"></i>View User</a></li>
                      <li><a href="{{ route('users.add') }}"><i class="ti-more"></i>Add User</a></li>
-                     
+
                  </ul>
              </li>
              {{-- @endif --}}
 
-             <li class="treeview }">
-                 {{-- {{ $prefix == '/profile' ? 'active' : '' } --}}
+             {{-- When the prefix is as /profile display it as being active --}}
+
+             <li class="treeview {{ $prefix == '/profile' ? 'active' : '' }}">
                  <a href="#">
                      <i data-feather="grid"></i> <span>Manage Profile</span>
                      <span class="pull-right-container">
@@ -60,10 +62,9 @@
                      </span>
                  </a>
                  <ul class="treeview-menu">
-                     <li><a href=""><i class="ti-more"></i>Your Profile</a></li>
-                     {{-- {{ route('profile.view') }} --}}
-                     <li><a href=""><i class="ti-more"></i>Change Password</a></li>
-                     {{-- {{ route('password.view') }} --}}
+                     <li><a href="{{ route('profile.view') }}"><i class="ti-more"></i>Your Profile</a></li>
+                     <li><a href="{{ route('password.view') }}"><i class="ti-more"></i>Change Password</a></li>
+
 
                  </ul>
              </li>

@@ -9,7 +9,8 @@
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('backend/images/favicon.ico') }}">
 
-    <title>School Management System - Dashboard</title>
+  
+    <title>@yield('title') - Tuxton Peoples Relations System </title> 
 
     <!-- Vendors Style-->
     <link rel="stylesheet" href="{{ asset('backend/css/vendors_css.css') }}">
@@ -33,6 +34,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         @yield('admin')
+         @yield('content')
         <!-- /.content-wrapper -->
 
         @include('admin.body.footer')
