@@ -26,7 +26,6 @@
                                         <div class="col-12">
                                             <div class="add_item">
 
-
                                                 <div class="form-group">
                                                     <h5>Class Name <span class="text-danger">*</span></h5>
                                                     <div class="controls">

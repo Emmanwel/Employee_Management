@@ -14,7 +14,6 @@ class ExamTypeController extends Controller
         return view('backend.setup.exam_type.view_exam_type', $data);
     }
 
-
     public function AddExamType()
     {
         return view('backend.setup.exam_type.add_exam_type');
@@ -40,8 +39,6 @@ class ExamTypeController extends Controller
 
         return redirect()->route('exam.type.view')->with($notification);
     }
-
-
     public function EditExamType($id)
     {
         $editData = ExamType::find($id);

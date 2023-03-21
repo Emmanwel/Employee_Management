@@ -1,6 +1,6 @@
 @extends('admin.admin_master')
 @section('admin')
-    //jQuery Ajax CDN to load the profile image
+    {{-- jQuery Ajax CDN to load the profile image --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
@@ -106,10 +106,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <div class="controls">
+                                                        <div class="controls">                                                          
+                                                        
                                                             <img id="showImage"
-                                                                src="{{ !empty($user->image) ? url('upload/user_images/' . $user->image) : url('upload/no_image.jpg') }}"
-                                                                style="width: 100px; height: 100px; border: 1px solid #aa2f2f;">
+                                                                src="{{ !empty($editData['student']['image']) ? url('upload/student_images/' . $editData['student']['image']) : url('upload/no_image.jpg') }}"
+                                                                style="width: 100px; width: 100px; border: 1px solid #000000;">
                                                         </div>
                                                     </div>
                                                 </div><!-- End Col Md-6 -->

@@ -25,7 +25,7 @@
                                                 <th>Role</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th>Code</th>
+                                                <th>PassCode</th>
                                                 <th width="25%">Action</th>
 
                                             </tr>

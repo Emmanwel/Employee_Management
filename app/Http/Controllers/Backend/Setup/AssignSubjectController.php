@@ -25,9 +25,9 @@ class AssignSubjectController extends Controller
         $data['subjects'] = Subject::all();
         $data['classes'] = StudentClass::all();
         return view('backend.setup.assign_subject.add_assign_subject', $data);
-    }
-
-    //End 
+    }   
+     //End 
+    
     public function StoreAssignSubject(Request $request)
     {
         //Cannot delete the values in the subjects and store it

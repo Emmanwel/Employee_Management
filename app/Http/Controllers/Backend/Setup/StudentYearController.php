@@ -18,7 +18,6 @@ class StudentYearController extends Controller
     //End 
     public function AddStudentYear()
     {
-
         return view('backend.setup.student_year.add_year');
     }
 

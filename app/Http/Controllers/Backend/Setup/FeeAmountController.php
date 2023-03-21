@@ -29,8 +29,6 @@ class FeeAmountController extends Controller
     }
 
     //end
-
-
     public function StoreFeeAmount(Request $request)
     {
 
@@ -61,7 +59,6 @@ class FeeAmountController extends Controller
         $data['classes'] = StudentClass::all();
         return view('backend.setup.fee_amount.edit_fee_amount', $data);
     }
-
     //end
 
     public function UpdateFeeAmount(Request $request, $fee_category_id)
@@ -72,7 +69,6 @@ class FeeAmountController extends Controller
                 'message' => 'You have to Select Class and Amount In Order to Update',
                 'alert-type' => 'error'
             );
-
             return redirect()->route('fee.amount.edit', $fee_category_id)->with($notification);
         } else {
 

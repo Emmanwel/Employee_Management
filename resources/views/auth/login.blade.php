@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../images/favicon.ico">
 
-    <title>Employee Management - Log in </title>
+    <title>Mahjong Peoples Relations Management - Log in </title>
 
     <!-- Vendors Style-->
     <link rel="stylesheet" href="{{ asset('backend/css/vendors_css.css') }}">

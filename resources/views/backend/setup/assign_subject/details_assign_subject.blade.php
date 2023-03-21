@@ -41,7 +41,6 @@
                                                     <td> {{ $detail->full_mark }}</td>
                                                     <td> {{ $detail->pass_mark }}</td>
                                                     <td> {{ $detail->subjective_mark }}</td>
-
                                                 </tr>
                                             @endforeach
 

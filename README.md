@@ -21,3 +21,8 @@ SETUP MANAGEMENT                                     STUDENT MANAGEMENT
 
 Assign Subject passmark -  Ensure that every class has its passmark as per to the prevailing perfomamnces
 
+
+
+Student Management. 
+Student Registration 
+Capture Role as Users Only. 

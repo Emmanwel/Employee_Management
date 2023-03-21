@@ -14,7 +14,8 @@ class UserController extends Controller
     public function UserView()
     {
         // $allData = User::all();
-        $data['allData'] = User::all();
+        // $data['allData'] = User::all();
+        $data['allData'] = User::where('userType', 'Admin')->get();
         return view('backend.user.view_user', $data);
     }
     public function AddUser()
@@ -25,9 +26,6 @@ class UserController extends Controller
     {
 
         //Perfom some Valiadations
-
-
-
         $validatedData = $request->validate(
             [
                 'email' => 'required|unique:users',
@@ -40,13 +38,14 @@ class UserController extends Controller
         );
 
         $data = new User();
-        //$code = rand(0000, 9999);
-        //$data->role = 'Admin';
+        //generate random password
+        $code = rand(0000, 9999);
+        $data->userType = 'Admin';
         $data->role = $request->role;
         $data->name = $request->name;
         $data->email = $request->email;
-        $data->password = bcrypt($request->password);
-        //$data->code = $code;
+        $data->password = bcrypt($code);
+        $data->code = $code;
         $data->save();
 
         $notification = array(
@@ -68,6 +67,7 @@ class UserController extends Controller
         $data->name = $request->name;
         $data->email = $request->email;
         $data->role = $request->role;
+
         $data->save();
 
         $notification = array(
