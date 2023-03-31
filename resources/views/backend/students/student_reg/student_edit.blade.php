@@ -1,6 +1,8 @@
 @extends('admin.admin_master')
 @section('admin')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <div class="content-wrapper">
         <div class="container-full">
@@ -49,11 +51,11 @@
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <h5>Father's Name <span class="text-danger">*</span></h5>
+                                                        <h5>Father's Name </h5>
                                                         <div class="controls">
                                                             <input type="text" name="fname"
                                                                 value="{{ $editData['student']['fname'] }}"
-                                                                class="form-control" required="">
+                                                                class="form-control" >
                                                         </div>
                                                     </div>
 
@@ -61,11 +63,11 @@
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <h5>Mother's Name <span class="text-danger">*</span></h5>
+                                                        <h5>Mother's Name </h5>
                                                         <div class="controls">
                                                             <input type="text" name="lname"
                                                                 value="{{ $editData['student']['lname'] }}"
-                                                                class="form-control" required="">
+                                                                class="form-control" >
                                                         </div>
                                                     </div>
                                                 </div> <!-- End Col md 4 -->
@@ -93,11 +95,11 @@
                                                 <div class="col-md-4">
 
                                                     <div class="form-group">
-                                                        <h5>Address <span class="text-danger">*</span></h5>
+                                                        <h5>Address </h5>
                                                         <div class="controls">
                                                             <input type="text" name="address"
                                                                 value="{{ $editData['student']['address'] }}"
-                                                                class="form-control" required="">
+                                                                class="form-control" >
                                                         </div>
                                                     </div>
 
@@ -133,7 +135,7 @@
 
                                                 <!-- 3rd Row -->
 
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <h5>Religion <span class="text-danger">*</span></h5>
                                                         <div class="controls">
@@ -157,7 +159,7 @@
                                                     </div>
                                                 </div> <!-- End Col md 4 -->
 
-                                                <div class="col-md-4">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <h5>Date of Birth <span class="text-danger">*</span></h5>
                                                         <div class="controls">
@@ -168,8 +170,20 @@
                                                     </div>
                                                 </div> <!-- End Col md 4 -->
 
+                                                   <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <h5>Age <span class="text-danger">*</span></h5>
+                                                        <div class="controls">
+                                                            <input type="text" name="nokmobile"
+                                                            value="{{ $editData['student']['nokmobile'] }}"
+                                                            class="form-control"
+                                                                >
+                                                        </div>
+                                                    </div>
+                                                </div> <!-- End Col md 4 -->
 
-                                                <div class="col-md-4">
+
+                                                <div class="col-md-3">
                                                     <div class="form-group">
                                                         <h5>Discount <span class="text-danger">*</span></h5>
                                                         <div class="controls">
@@ -305,6 +319,19 @@
                     $('#showImage').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(e.target.files['0']);
+            });
+               var nokmobile = "";
+            $('#dob').datepicker({
+                onSelect: function(value, ui) {
+                    var today = new Date();
+                    nokmobile = today.getFullYear() - ui.selectedYear;
+                    $('#nokmobile').val(nokmobile);
+                },
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1960 : 2030",
+                maxDate: "-6y",
+                minDate: "-50y"
             });
         });
     </script>

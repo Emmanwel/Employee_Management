@@ -36,7 +36,7 @@ class MonthlyFeeController extends Controller
         $html['thsource']  = '<th>SL</th>';
         $html['thsource'] .= '<th>ID No</th>';
         $html['thsource'] .= '<th>Student Name</th>';
-        $html['thsource'] .= '<th>Roll No</th>';
+        $html['thsource'] .= '<th>Role</th>';
         $html['thsource'] .= '<th>Monthly Fee</th>';
         $html['thsource'] .= '<th>Discount </th>';
         $html['thsource'] .= '<th>Student Fee </th>';
@@ -58,7 +58,7 @@ class MonthlyFeeController extends Controller
             $discounttablefee = $discount / 100 * $originalfee;
             $finalfee = (float)$originalfee - (float)$discounttablefee;
 
-            $html[$key]['tdsource'] .= '<td>' . $finalfee . '$' . '</td>';
+            $html[$key]['tdsource'] .= '<td>' . $finalfee . 'KSH' . '</td>';
             $html[$key]['tdsource'] .= '<td>';
             $html[$key]['tdsource'] .= '<a class="btn btn-sm btn-' . $color . '" title="MonthlyFeeSlip" target="_blanks" href="' . route("student.monthly.fee.slip") . '?class_id=' . $v->class_id . '&student_id=' . $v->student_id . '&month=' . $request->month . ' ">Monthly Fee</a>';
             $html[$key]['tdsource'] .= '</td>';

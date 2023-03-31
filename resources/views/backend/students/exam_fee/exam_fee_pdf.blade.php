@@ -40,7 +40,7 @@
         <tr>
             <td>
                 <h2>
-                    <?php $image_path = '/upload/easyschool.png'; ?>
+                    <?php $image_path = '/upload/user_images/202303110727DSC_0014.png'; ?>
                     <img src="{{ public_path() . $image_path }}" width="200" height="100">
 
                 </h2>

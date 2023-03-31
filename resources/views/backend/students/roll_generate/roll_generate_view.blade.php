@@ -75,11 +75,11 @@
                                             <table class="table table-bordered table-striped" style="width: 100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>ID No</th>
+                                                        <th>Admin No</th>
                                                         <th>Student Name </th>
                                                         <th>Father Name </th>
                                                         <th>Gender</th>
-                                                        <th>Roll</th>
+                                                        <th>Role </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="roll-generate-tr">
@@ -136,3 +136,10 @@
         });
     </script>
 @endsection
+
+{{-- <label for = "roll" > Mark Register: </label>  
+<select class = "form-control form-control-sm" name = "roll[]" value = "' + v.roll + '" >
+ <option value = "present" > Present </option>  
+<option value = "absent" > Absent </option>  
+<option value = "suspended" > Suspended </option>  
+</select> --}}

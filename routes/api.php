@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Notifications\AnnouncementsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//Api to store a list of notifications before being send
+Route::post('announcements', [AnnouncementsController::class, 'store']);

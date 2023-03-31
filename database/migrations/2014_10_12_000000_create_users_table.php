@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('religion')->nullable();
             $table->string('id_no')->nullable();
             $table->date('dob')->nullable();
+            
             $table->string('nokname')->nullable();
             $table->string('nokmobile')->nullable();
             $table->string('nokrelationship')->nullable();

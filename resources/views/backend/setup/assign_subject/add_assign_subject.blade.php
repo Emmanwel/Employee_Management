@@ -12,7 +12,7 @@
                 <!-- Basic Forms -->
                 <div class="box">
                     <div class="box-header with-border">
-                        <h4 class="box-title">Add Assign Subject</h4>
+                        <h4 class="box-title">Assign Subject Marks</h4>
 
                     </div>
                     <!-- /.box-header -->
@@ -27,11 +27,11 @@
                                             <div class="add_item">
 
                                                 <div class="form-group">
-                                                    <h5>Class Name <span class="text-danger">*</span></h5>
+                                                    <h5>Grade Name <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <select name="class_id" required="" class="form-control">
                                                             <option value="" selected="" disabled="">Select
-                                                                Class</option>
+                                                                Grade</option>
                                                             @foreach ($classes as $class)
                                                                 <option value="{{ $class->id }}">{{ $class->name }}
                                                                 </option>
@@ -66,7 +66,7 @@
 
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <h5>Full Mark <span class="text-danger">*</span></h5>
+                                                            <h5>Full Mark </h5>
                                                             <div class="controls">
                                                                 <input type="text" name="full_mark[]"
                                                                     class="form-control">
@@ -76,7 +76,7 @@
 
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <h5>Pass Mark <span class="text-danger">*</span></h5>
+                                                            <h5>Pass Mark </h5>
                                                             <div class="controls">
                                                                 <input type="text" name="pass_mark[]"
                                                                     class="form-control">
@@ -86,7 +86,7 @@
 
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <h5>Subjective Mark <span class="text-danger">*</span></h5>
+                                                            <h5>Subjective Mark </h5>
                                                             <div class="controls">
                                                                 <input type="text" name="subjective_mark[]"
                                                                     class="form-control">
@@ -145,7 +145,7 @@
 
                     <div class="col-md-2">
                         <div class="form-group">
-                            <h5>Full Mark <span class="text-danger">*</span></h5>
+                            <h5>Full Mark </h5>
                             <div class="controls">
                                 <input type="text" name="full_mark[]" class="form-control">
                             </div>
@@ -154,7 +154,7 @@
 
                     <div class="col-md-2">
                         <div class="form-group">
-                            <h5>Pass Mark <span class="text-danger">*</span></h5>
+                            <h5>Pass Mark </h5>
                             <div class="controls">
                                 <input type="text" name="pass_mark[]" class="form-control">
                             </div>
@@ -163,7 +163,7 @@
 
                     <div class="col-md-2">
                         <div class="form-group">
-                            <h5>Subjective Mark <span class="text-danger">*</span></h5>
+                            <h5>Subjective Mark </h5>
                             <div class="controls">
                                 <input type="text" name="subjective_mark[]" class="form-control">
                             </div>

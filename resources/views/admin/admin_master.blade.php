@@ -9,8 +9,8 @@
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('backend/images/goprod.png') }}">
 
-  
-    <title>@yield('title') - Tuxton Peoples Relations System </title> 
+
+    <title>@yield('title') - Mukhebi Peoples Relations Management System </title>
 
     <!-- Vendors Style-->
     <link rel="stylesheet" href="{{ asset('backend/css/vendors_css.css') }}">
@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ asset('backend/css/skin_color.css') }}">
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 </head>
 
@@ -34,7 +36,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         @yield('admin')
-         @yield('content')
+        @yield('content')
         <!-- /.content-wrapper -->
 
         @include('admin.body.footer')
@@ -53,8 +55,21 @@
     <script src="{{ asset('../assets/vendor_components/apexcharts-bundle/dist/apexcharts.js') }}"></script>
 
 
+    <!-- Calender section-->
+
+    <script src="{{ asset('../assets/vendor_components/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('../assets/vendor_components/perfect-scrollbar-master/perfect-scrollbar.jquery.min.js') }}">
+    </script>
+    <script src="{{ asset('../assets/vendor_components/fullcalendar/lib/moment.min.js') }}"></script>
+    <script src="{{ asset('../assets/vendor_components/fullcalendar/fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('backend/js/pages/calendar.js') }}"></script>
+
+    {{-- end calender --}}
+
+
     <script src="{{ asset('../assets/vendor_components/datatable/datatables.min.js') }}"></script>
     <script src="{{ asset('backend/js/pages/data-table.js') }}"></script>
+
 
 
     <!-- Mukhebi Admin App -->

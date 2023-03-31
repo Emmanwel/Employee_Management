@@ -96,10 +96,12 @@
                                                 <tr>
                                                     <th width="5%">SL</th>
                                                     <th>Name</th>
-                                                    <th>ID No</th>
+                                                    <th>Reg No</th>
                                                     <th>Gender</th>
-                                                    <th>Roll</th>
+                                                    {{-- <th>Roll</th> --}}
+                                                    <th>Age</th>
                                                     <th>Year</th>
+                                                    
                                                     <th>Class</th>
                                                     <th>Image</th>
                                                     @if (Auth::user()->role == 'Admin')
@@ -117,7 +119,8 @@
                                                         <td> {{ $value['student']['name'] }}</td>
                                                         <td> {{ $value['student']['id_no'] }}</td>
                                                         <td> {{ $value['student']['gender'] }}</td>
-                                                        <td> {{ $value->roll }} </td>
+                                                        <td> {{ $value['student']['nokmobile'] }}</td>
+                                                        {{-- <td> {{ $value->roll }} </td> --}}
                                                         <td> {{ $value['student_year']['name'] }}</td>
                                                         <td> {{ $value['student_class']['name'] }}</td>
                                                         <td>

@@ -47,7 +47,7 @@
                                                 <div class="col-md-4">
 
                                                     <div class="form-group">
-                                                        <h5>Father's Name <span class="text-danger"></span></h5>
+                                                        <h5>ID Number/Passport <span class="text-danger">*</span></h5>
                                                         <div class="controls">
                                                             <input type="text" name="fname"
                                                                 value="{{ $editData->fname }}"class="form-control">
@@ -60,7 +60,7 @@
                                                 <div class="col-md-4">
 
                                                     <div class="form-group">
-                                                        <h5>Mother's Name <span class="text-danger"></span></h5>
+                                                        <h5>Guardian Name <span class="text-danger"></span></h5>
                                                         <div class="controls">
                                                             <input type="text" name="lname"
                                                                 value="{{ $editData->lname }}"class="form-control">
@@ -93,11 +93,11 @@
                                                 <div class="col-md-4">
 
                                                     <div class="form-group">
-                                                        <h5>Address <span class="text-danger">*</span></h5>
+                                                        <h5>Address <span class="text-danger"></span></h5>
                                                         <div class="controls">
                                                             <input type="text" name="address"
                                                                 value="{{ $editData->address }}" class="form-control"
-                                                                required="">
+                                                                >
                                                         </div>
                                                     </div>
 
@@ -120,7 +120,7 @@
                                                                     Female</option>
                                                                 <option value="Others"
                                                                     {{ $editData->gender == 'Others' ? 'selected' : '' }}>
-                                                                    Female</option>
+                                                                    Prefer Not To Say</option>
 
                                                             </select>
 
@@ -218,7 +218,7 @@
                                                 <div class="col-md-3">
 
                                                     <div class="form-group">
-                                                        <h5>Joining Date <span class="text-danger">*</span></h5>
+                                                        <h5>Date Joined <span class="text-danger">*</span></h5>
                                                         <div class="controls">
                                                             <input type="date" name="join_date"
                                                                 value="{{ $editData->join_date }}" class="form-control"

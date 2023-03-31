@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li class="btn-group nav-item d-none d-xl-inline-block">
-                    <a href="calendar.html" class="waves-effect waves-light nav-link rounded svg-bt-icon"
+                    <a href="{{ route('calender.view') }}" class="waves-effect waves-light nav-link rounded svg-bt-icon"
                         title="">
                         <i class="ti-calendar"></i>
                     </a>
@@ -39,13 +39,17 @@
                     </div>
                 </li>
                 <!-- Notifications -->
+
                 <li class="dropdown notifications-menu">
                     <a href="#" class="waves-effect waves-light rounded dropdown-toggle" data-toggle="dropdown"
-                        title="Notifications">
-                        <i class="ti-bell"></i>
-                    </a>
-                    <ul class="dropdown-menu animated bounceIn">
+                        aria-haspopup="true" aria-expanded="false" v-pre title="Notifications">
 
+                        <i class="ti-bell"></i>
+                        <span
+                            class="badge badge-light bg-success badge-xs">{{ auth()->user()->unreadNotifications->count() }}</span>
+                    </a>
+
+                    <ul class="dropdown-menu animated bounceIn">
                         <li class="header">
                             <div class="p-20">
                                 <div class="flexbox">
@@ -58,64 +62,36 @@
                                 </div>
                             </div>
                         </li>
+                        @if (auth()->user()->unreadNotifications)
+                            <li class="d-flex justify-content-end mx-1 my-2">
+                                <a href="{{ route('mark-as-read') }}" class="text-secondary btn btn-success btn-sm">Mark All as
+                                    Read</a>
+                            </li>
+                        @endif
 
-                        <li>
-                            <!-- inner menu: contains the actual data -->
-                            <ul class="menu sm-scrol">
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-users text-info"></i> Curabitur id eros quis nunc suscipit
-                                        blandit.
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-warning text-warning"></i> Duis malesuada justo eu sapien
-                                        elementum, in semper diam posuere.
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-users text-danger"></i> Donec at nisi sit amet tortor commodo
-                                        porttitor pretium a erat.
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-shopping-cart text-success"></i> In gravida mauris et nisi
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-user text-danger"></i> Praesent eu lacus in libero dictum
-                                        fermentum.
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-user text-primary"></i> Nunc fringilla lorem
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-user text-success"></i> Nullam euismod dolor ut quam interdum,
-                                        at scelerisque ipsum imperdiet.
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="footer">
-                            <a href="#">View all</a>
-                        </li>
+                        @foreach (auth()->user()->unreadNotifications as $notification)
+                            <a href="#" class="text-success">
+                                <li class="p-1 text-success"> {{ $notification->data['data'] }}</li>
+                            </a>
+                        @endforeach
+                        @foreach (auth()->user()->readNotifications as $notification)
+                            <a href="#" class="text-secondary">
+                                <li class="p-1 text-secondary"> {{ $notification->data['data'] }}</li>
+                            </a>
+                        @endforeach
                     </ul>
                 </li>
 
+
+
+
+
                 {{-- Ensure that the image can be accessed from any page --}}
                 @php
-                    $user = DB::table('users')
-                        ->where('id', Auth::user()->id)
-                        ->first();
-                @endphp
+                $user = DB::table('users')
+                    ->where('id', Auth::user()->id)
+                    ->first();
+            @endphp
                 <!-- User Account-->
                 <li class="dropdown user user-menu">
                     <a href="#" class="waves-effect waves-light rounded dropdown-toggle p-0"

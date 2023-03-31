@@ -23,7 +23,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <h5>Student Class Name <span class="text-danger">*</span></h5>
+                                                <h5>Student Grade Name <span class="text-danger">*</span></h5>
                                                 <div class="controls">
                                                     <input type="text" name="name" class="form-control"
                                                         value="{{ $editData->name }}">

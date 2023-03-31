@@ -44,9 +44,9 @@
                                                 <div class="col-md-4">
 
                                                     <div class="form-group">
-                                                        <h5>Father's Name <span class="text-danger"></span></h5>
+                                                        <h5>ID Number/Passport <span class="text-danger">*</span></h5>
                                                         <div class="controls">
-                                                            <input type="text" name="fname" class="form-control">
+                                                            <input type="text" name="fname" class="form-control" required="">
                                                         </div>
                                                     </div>
 
@@ -56,7 +56,7 @@
                                                 <div class="col-md-4">
 
                                                     <div class="form-group">
-                                                        <h5>Mother's Name <span class="text-danger"></span></h5>
+                                                        <h5>Guardian Name <span class="text-danger"></span></h5>
                                                         <div class="controls">
                                                             <input type="text" name="mname" class="form-control">
                                                         </div>
@@ -87,10 +87,10 @@
                                                 <div class="col-md-4">
 
                                                     <div class="form-group">
-                                                        <h5>Address <span class="text-danger">*</span></h5>
+                                                        <h5>Address <span class="text-danger"></span></h5>
                                                         <div class="controls">
                                                             <input type="text" name="address" class="form-control"
-                                                                required="">
+                                                                >
                                                         </div>
                                                     </div>
 
@@ -193,7 +193,7 @@
                                                 <div class="col-md-3">
 
                                                     <div class="form-group">
-                                                        <h5>Joining Date <span class="text-danger">*</span></h5>
+                                                        <h5>Date Joined <span class="text-danger">*</span></h5>
                                                         <div class="controls">
                                                             <input type="date" name="join_date" class="form-control"
                                                                 required="">

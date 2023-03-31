@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Backend\Student;
 
 //use Barryvdh\DomPDF\Facade\Pdf;
 
-use App\Models\User;
+use Carbon\Carbon;
 
 //use niklasravnsborg\DomPDF\Facade as PDF;
 //use niklasravnsborg\LaravelPdf\Facade as PDF;
@@ -14,6 +14,7 @@ use App\Models\User;
 //use niklasravnsborg\LaravelPdf\PDF;
 //use \PDF;
 
+use App\Models\User;
 use Barryvdh\DomPDF\PDF;
 use App\Models\StudentYear;
 use App\Models\StudentClass;
@@ -24,6 +25,7 @@ use App\Models\DiscountStudent;
 use App\Models\RegisterStudent;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Registered;
 
 class StudentRegController extends Controller
 {
@@ -107,6 +109,8 @@ class StudentRegController extends Controller
                 }
             } // end else
 
+
+
             $final_id_no = $checkYear . $id_no;
             $user = new User();
             $code = rand(0000, 9999);
@@ -121,7 +125,11 @@ class StudentRegController extends Controller
             $user->address = $request->address;
             $user->gender = $request->gender;
             $user->religion = $request->religion;
+            $user->nokmobile = $request->nokmobile;
             $user->dob = date('Y-m-d', strtotime($request->dob));
+
+
+            //$user = \Carbon\Carbon::parse($request->nokmobile)->diff(\Carbon\Carbon::now())->format('%y years, %m months and %d days');
 
             if ($request->file('image')) {
                 $file = $request->file('image');
@@ -139,12 +147,17 @@ class StudentRegController extends Controller
             $register_student->shift_id = $request->shift_id;
             $register_student->save();
 
+            event(new Registered($user));
+
+
             $discount_student = new DiscountStudent();
             $discount_student->register_student_id = $register_student->id;
             $discount_student->fee_category_id = '1';
             $discount_student->discount = $request->discount;
             $discount_student->save();
         });
+
+
 
         $notification = [
             'message' => 'Student Registered Successfully',
@@ -187,7 +200,8 @@ class StudentRegController extends Controller
             $user->address = $request->address;
             $user->gender = $request->gender;
             $user->religion = $request->religion;
-            $user->dob = date('Y-m-d', strtotime($request->dob));
+            $user->nokmobile = $request->nokmobile;
+            $user->dob = date('Y-m-d H:i"', strtotime($request->dob));
 
             if ($request->file('image')) {
                 $file = $request->file('image');

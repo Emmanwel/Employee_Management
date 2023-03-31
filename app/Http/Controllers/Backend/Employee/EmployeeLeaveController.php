@@ -65,52 +65,67 @@ class EmployeeLeaveController extends Controller
     } // end Method 
 
 
-     public function LeaveEdit($id){
-    	$data['editData'] = EmployeeLeave::find($id);
-    	$data['employees'] = User::where('userType','Employee')->get();
-    	$data['leave_purpose'] = LeavePurpose::all();
-    	return view('backend.employees.employee_leave.employee_leave_edit',$data);
-
+    public function LeaveEdit($id)
+    {
+        $data['editData'] = EmployeeLeave::find($id);
+        $data['employees'] = User::where('userType', 'Employee')->get();
+        $data['leave_purpose'] = LeavePurpose::all();
+        return view('backend.employees.employee_leave.employee_leave_edit', $data);
     }
 
 
 
-    public function LeaveUpdate(Request $request,$id){
+    public function LeaveUpdate(Request $request, $id)
+    {
 
-    	if ($request->leave_purpose_id == "0") {
-    		$leavepurpose = new LeavePurpose();
-    		$leavepurpose->name = $request->name;
-    		$leavepurpose->save();
-    		$leave_purpose_id = $leavepurpose->id;
-    	}else{
-    		$leave_purpose_id = $request->leave_purpose_id;
-    	}
+        if ($request->leave_purpose_id == "0") {
+            $leavepurpose = new LeavePurpose();
+            $leavepurpose->name = $request->name;
+            $leavepurpose->save();
+            $leave_purpose_id = $leavepurpose->id;
+        } else {
+            $leave_purpose_id = $request->leave_purpose_id;
+        }
 
-    	$data = EmployeeLeave::find($id);
-    	$data->employee_id = $request->employee_id;
-    	$data->leave_purpose_id = $leave_purpose_id;
-    	$data->start_date = date('Y-m-d',strtotime($request->start_date));
-    	$data->end_date = date('Y-m-d',strtotime($request->end_date));
-    	$data->save();
+        $data = EmployeeLeave::find($id);
+        $data->employee_id = $request->employee_id;
+        $data->leave_purpose_id = $leave_purpose_id;
+        $data->start_date = date('Y-m-d', strtotime($request->start_date));
+        $data->end_date = date('Y-m-d', strtotime($request->end_date));
+        $data->save();
 
-    	$notification = array(
-    		'message' => 'Employee Leave Data Updated Successfully',
-    		'alert-type' => 'success'
-    	);
+        $notification = array(
+            'message' => 'Employee Leave Data Updated Successfully',
+            'alert-type' => 'success'
+        );
 
-    	return redirect()->route('employee.leave.view')->with($notification);
-
+        return redirect()->route('employee.leave.view')->with($notification);
     } // end Method 
 
-     public function LeaveDelete($id){
-    	$leave = EmployeeLeave::find($id);
-    	$leave->delete();
+    public function LeaveDelete($id)
+    {
+        $leave = EmployeeLeave::find($id);
+        $leave->delete();
 
-    	$notification = array(
-    		'message' => 'Employee Leave Data Deleted Successfully',
-    		'alert-type' => 'success'
-    	);
+        $notification = array(
+            'message' => 'Employee Leave Data Deleted Successfully',
+            'alert-type' => 'success'
+        );
 
-    	return redirect()->route('employee.leave.view')->with($notification);
-    }
+        return redirect()->route('employee.leave.view')->with($notification);
+    } // End
+
+    public function LeaveApprove($id)
+    {
+        $leave = EmployeeLeave::find($id);
+        $leave->approve();
+
+        $notification = array(
+            'message' => 'Employee Leave Approved Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('employee.leave.view')->with($notification);
+    } // End
+
 }

@@ -13,12 +13,12 @@ class GradeController extends Controller
     {
         $data['allData'] = MarksGrade::all();
         return view('backend.marks.grade_marks_view', $data);
-    }//End
-    
+    } //End
+
     public function MarksGradeAdd()
     {
         return view('backend.marks.grade_marks_add');
-    }//End
+    } //End
 
     public function MarksGradeStore(Request $request)
     {
@@ -39,15 +39,15 @@ class GradeController extends Controller
         );
 
         return redirect()->route('marks.entry.grade')->with($notification);
-    } // end Method 
+    } // end Method
 
 
     public function MarksGradeEdit($id)
     {
         $data['editData'] = MarksGrade::find($id);
         return view('backend.marks.grade_marks_edit', $data);
-    }//END
-    
+    } //END
+
     public function MarksGradeUpdate(Request $request, $id)
     {
 
@@ -67,5 +67,5 @@ class GradeController extends Controller
         );
 
         return redirect()->route('marks.entry.grade')->with($notification);
-    }//End Method
+    } //End Method
 }

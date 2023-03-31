@@ -45,14 +45,14 @@
                                                     <div class="col-md-5">
 
                                                         <div class="form-group">
-                                                            <h5>Student Class <span class="text-danger">*</span></h5>
+                                                            <h5>Student Grade <span class="text-danger">*</span></h5>
                                                             <div class="controls">
 
                                                                 {{-- [] used to ensure the values passed are arrays --}}
                                                                 <select name="class_id[]" required=""
                                                                     class="form-control">
                                                                     <option value="" selected="" disabled="">
-                                                                        Select Student Class</option>
+                                                                        Select Student Grade</option>
                                                                     @foreach ($classes as $class)
                                                                         <option value="{{ $class->id }}">
                                                                             {{ $class->name }}</option>
@@ -111,10 +111,10 @@
                     <div class="col-md-5 style="display:flex;">
 
                         <div class="form-group">
-                            <h5>Student Class <span class="text-danger">*</span></h5>
+                            <h5>Student Grade <span class="text-danger">*</span></h5>
                             <div class="controls">
                                 <select name="class_id[]" required="" class="form-control">
-                                    <option value="" selected="" disabled="">Select Fee Category</option>
+                                    <option value="" selected="" disabled="">Select Student Grade</option>
                                     @foreach ($classes as $class)
                                         <option value="{{ $class->id }}">{{ $class->name }}</option>
                                     @endforeach

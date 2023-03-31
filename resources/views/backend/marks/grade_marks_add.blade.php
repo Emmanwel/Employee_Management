@@ -126,10 +126,10 @@
                                                 <div class="col-md-4">
 
                                                     <div class="form-group">
-                                                        <h5>Remarks <span class="text-danger">*</span></h5>
+                                                        <h5>Remarks </h5>
                                                         <div class="controls">
                                                             <input type="text" name="remarks" class="form-control"
-                                                                required="">
+                                                               >
                                                         </div>
                                                     </div>
 

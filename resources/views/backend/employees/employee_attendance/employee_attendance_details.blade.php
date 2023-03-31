@@ -26,7 +26,7 @@
                                             <tr>
                                                 <th width="5%">SL</th>
                                                 <th>Name</th>
-                                                <th>ID No </th>
+                                                <th>Employee ID </th>
                                                 <th>Date </th>
                                                 <th>Attend Status</th>
 

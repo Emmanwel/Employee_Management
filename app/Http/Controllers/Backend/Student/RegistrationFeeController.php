@@ -35,9 +35,9 @@ class RegistrationFeeController extends Controller
         $allStudent = RegisterStudent::with(['discount'])->where($where)->get();
         // dd($allStudent);
         $html['thsource']  = '<th>SL</th>';
-        $html['thsource'] .= '<th>ID No</th>';
+        $html['thsource'] .= '<th>Reg No</th>';
         $html['thsource'] .= '<th>Student Name</th>';
-        $html['thsource'] .= '<th>Roll No</th>';
+        $html['thsource'] .= '<th>Role No</th>';
         $html['thsource'] .= '<th>Reg Fee</th>';
         $html['thsource'] .= '<th>Discount </th>';
         $html['thsource'] .= '<th>Student Fee </th>';

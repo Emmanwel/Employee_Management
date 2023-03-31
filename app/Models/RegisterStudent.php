@@ -2,16 +2,23 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\StudentYear;
 use App\Models\StudentGroup;
 use App\Models\StudentShift;
 use App\Models\DiscountStudent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\RegisterStudent as Authenticatable;
+
 
 class RegisterStudent extends Model
+
 {
     //use HasFactory;
+    use Notifiable;
 
     public function student()
     {
@@ -37,4 +44,6 @@ class RegisterStudent extends Model
     {
         return $this->belongsTo(StudentShift::class, 'shift_id', 'id');
     }
+
+
 }

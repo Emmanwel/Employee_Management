@@ -14,17 +14,15 @@ class ProfileController extends Controller
     {
         $id = Auth::user()->id;
         $user = User::find($id);
-
         return view('backend.user.view_profile', compact('user'));
-    }
-
+    } //End
 
     public function ProfileEdit()
     {
         $id = Auth::user()->id;
         $editData = User::find($id);
         return view('backend.user.edit_profile', compact('editData'));
-    }
+    } //End
 
 
     public function StoreProfile(Request $request)

@@ -32,7 +32,7 @@
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                                   <th>Status </th>
-                                                <th width="25%">Action</th>
+                                                <th width="35%">Action</th>
 
                                             </tr>
                                         </thead>
@@ -52,8 +52,11 @@
                                                     <td>
                                                         <a href="{{ route('employee.leave.edit', $leave->id) }}"
                                                             class="btn btn-info">Edit</a>
+                                                            <a href="{{ route('employee.leave.approve', $leave->id) }}"
+                                                            class="btn btn-success" id="delete">Approve</a>
                                                         <a href="{{ route('employee.leave.delete', $leave->id) }}"
                                                             class="btn btn-danger" id="delete">Delete</a>
+                                                           
 
                                                     </td>
 

@@ -1,23 +1,33 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Password;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\AdminController;
+use Illuminate\Auth\Events\PasswordReset;
+use App\Http\Controllers\DepositController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\DefaultController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\Marks\GradeController;
 use App\Http\Controllers\Backend\Marks\MarksController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Backend\Setup\SubjectController;
 use App\Http\Controllers\Backend\Setup\ExamTypeController;
+use App\Http\Controllers\Backend\Header\CalendarController;
 use App\Http\Controllers\Backend\Setup\FeeAmountController;
 use App\Http\Controllers\Backend\Setup\LeaveTypeController;
 use App\Http\Controllers\Backend\Student\ExamFeeController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryController;
 use App\Http\Controllers\Backend\Setup\StudentYearController;
+use App\Http\Controllers\Backend\Account\OtherCostsController;
+use App\Http\Controllers\Backend\Account\StudentFeeController;
 use App\Http\Controllers\Backend\Setup\StudentClassController;
 use App\Http\Controllers\Backend\Setup\StudentGroupController;
 use App\Http\Controllers\Backend\Setup\StudentShiftController;
@@ -26,6 +36,7 @@ use App\Http\Controllers\Backend\Student\StudentRegController;
 use App\Http\Controllers\Backend\Setup\AssignSubjectController;
 use App\Http\Controllers\Backend\Employee\EmployeeRegController;
 use App\Http\Controllers\Backend\student\GenerateRollController;
+use App\Http\Controllers\Backend\Account\AccountSalaryController;
 use App\Http\Controllers\Backend\Employee\EmployeeLeaveController;
 use App\Http\Controllers\Backend\Employee\MonthlySalaryController;
 use App\Http\Controllers\Backend\Employee\EmployeeSalaryController;
@@ -58,10 +69,89 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 //     return view('admin.index');
 // })->name('dashboard');
 
+
+//Email Verification
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/dashboard');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+//Password Reset Link Routes
+
+// Route::get('/forgot-password', function () {
+//     return view('auth.forgot-password');
+// })->middleware('guest')->name('password.request');
+
+
+// Route::post('/forgot-password', function (Request $request) {
+//     $request->validate(['email' => 'required|email']);
+
+//     $status = Password::sendResetLink(
+//         $request->only('email')
+//     );
+
+//     return $status === Password::RESET_LINK_SENT
+//         ? back()->with(['status' => __($status)])
+//         : back()->withErrors(['email' => __($status)]);
+// })->middleware('guest')->name('password.email');
+
+
+// Route::get('/reset-password/{token}', function (string $token) {
+//     return view('auth.reset-password', ['token' => $token]);
+// })->middleware('guest')->name('password.reset');
+
+
+
+// Route::post('/reset-password', function (Request $request) {
+//     $request->validate([
+//         'token' => 'required',
+//         'email' => 'required|email',
+//         'password' => 'required|min:8|confirmed',
+//     ]);
+
+//     $status = Password::reset(
+//         $request->only('email', 'password', 'password_confirmation', 'token'),
+//         function (User $user, string $password) {
+//             $user->forceFill([
+//                 'password' => Hash::make($password)
+//             ])->setRememberToken(Str::random(60));
+
+//             $user->save();
+
+//             event(new PasswordReset($user));
+//         }
+//     );
+
+//     return $status === Password::PASSWORD_RESET
+//         ? redirect()->route('login')->with('status', __($status))
+//         : back()->withErrors(['email' => [__($status)]]);
+// })->middleware('guest')->name('password.update');
+
+// End Pasword Reset
+
+
+
+
+
+
 Route::get('admin/logout', [AdminController::class, 'Logout'])->name('admin.logout');
 
 //Auth Middleware to restrict users from accesing these pages without login
-Route::group(['middleware'  => 'auth'], function () {
+Route::group(['middleware'  => 'auth', 'verified'], function () {
 
 
     //USER MANAGEMENT ALL ROUTES.
@@ -132,10 +222,27 @@ Route::group(['middleware'  => 'auth'], function () {
         return redirect('/');
     });
 
+
+
+    //Notifications Routes
+
+    Route::post('/deposit', [App\Http\Controllers\Backend\Notifications\DepositController::class, 'deposit'])->name('deposit');
+    Route::get('/mark-as-read', [DepositController::class, 'markAsRead'])->name('mark-as-read');
+
     //User Profile and Change Password Routes
 
     Route::prefix('profile')->group(function () {
         Route::get('/view', [ProfileController::class, 'ProfileView'])->name('profile.view');
+        Route::get('/edit', [ProfileController::class, 'ProfileEdit'])->name('profile.edit');
+        Route::post('/store', [ProfileController::class, 'StoreProfile'])->name('profile.store');
+        Route::get('/password/view', [ProfileController::class, 'PasswordView'])->name('password.view');
+        Route::post('/password/update', [ProfileController::class, 'PasswordUpdate'])->name('password.update');
+    });
+
+    //Calender routes
+
+    Route::prefix('calender')->group(function () {
+        Route::get('/view', [CalendarController::class, 'CalenderView'])->name('calender.view');
         Route::get('/edit', [ProfileController::class, 'ProfileEdit'])->name('profile.edit');
         Route::post('/store', [ProfileController::class, 'StoreProfile'])->name('profile.store');
         Route::get('/password/view', [ProfileController::class, 'PasswordView'])->name('password.view');
@@ -285,6 +392,9 @@ Route::group(['middleware'  => 'auth'], function () {
     });
 
 
+    //Employee Routes
+
+
     Route::prefix('employees')->group(function () {
 
         Route::get('/reg/view', [EmployeeRegController::class, 'EmployeeRegView'])->name('employee.registration.view');
@@ -295,7 +405,7 @@ Route::group(['middleware'  => 'auth'], function () {
         Route::get('/reg/details/{id}', [EmployeeRegController::class, 'ViewPDFofEmployeeDetails'])->name('employee.registration.details');
 
 
-        //Salary Increment 
+        //Salary Increment
         Route::get('salary/view', [EmployeeSalaryController::class, 'SalaryView'])->name('employee.salary.view');
         Route::get('salary/increment/{id}', [EmployeeSalaryController::class, 'SalaryIncrement'])->name('employee.salary.increment');
         Route::post('salary/store/{id}', [EmployeeSalaryController::class, 'StoreSalary'])->name('update.increment.store');
@@ -303,24 +413,25 @@ Route::group(['middleware'  => 'auth'], function () {
 
 
 
-        // Employee Leave All Routes 
+        // Employee Leave All Routes
         Route::get('leave/view', [EmployeeLeaveController::class, 'LeaveView'])->name('employee.leave.view');
         Route::get('leave/add', [EmployeeLeaveController::class, 'LeaveAdd'])->name('employee.leave.add');
         Route::post('leave/store', [EmployeeLeaveController::class, 'LeaveStore'])->name('store.employee.leave');
         Route::get('leave/edit/{id}', [EmployeeLeaveController::class, 'LeaveEdit'])->name('employee.leave.edit');
+        Route::get('leave/approve/{id}', [EmployeeLeaveController::class, 'LeaveApprove'])->name('employee.leave.approve');
         Route::post('leave/update/{id}', [EmployeeLeaveController::class, 'LeaveUpdate'])->name('update.employee.leave');
         Route::get('leave/delete/{id}', [EmployeeLeaveController::class, 'LeaveDelete'])->name('employee.leave.delete');
 
 
 
-        // Employee Attendance All Routes 
+        // Employee Attendance All Routes
         Route::get('attendance/view', [EmployeeAttendanceController::class, 'AttendanceView'])->name('employee.attendance.view');
         Route::get('attendance/add', [EmployeeAttendanceController::class, 'AttendanceAdd'])->name('employee.attendance.add');
         Route::post('attendance/store', [EmployeeAttendanceController::class, 'AttendanceStore'])->name('store.employee.attendance');
         Route::get('attendance/edit/{date}', [EmployeeAttendanceController::class, 'AttendanceEdit'])->name('employee.attendance.edit');
         Route::get('attendance/details/{date}', [EmployeeAttendanceController::class, 'AttendanceDetails'])->name('employee.attendance.details');
 
-        // Employee Monthly Salary All Routes 
+        // Employee Monthly Salary All Routes
         Route::get('monthly/salary/view', [MonthlySalaryController::class, 'MonthlySalaryView'])->name('employee.monthly.salary');
         Route::get('monthly/salary/get', [MonthlySalaryController::class, 'MonthlySalaryGet'])->name('employee.monthly.salary.get');
         Route::get('monthly/salary/payslip/{employee_id}', [MonthlySalaryController::class, 'MonthlySalaryPayslip'])->name('employee.monthly.salary.payslip');
@@ -330,20 +441,43 @@ Route::group(['middleware'  => 'auth'], function () {
     //Manage Marks  All My Routes
     Route::prefix('marks')->group(function () {
         Route::get('entry/add', [MarksController::class, 'MarksAdd'])->name('marks.entry.add');
-        Route::post('marks/entry/store', [MarksController::class, 'MarksStore'])->name('marks.entry.store'); 
-        Route::get('entry/edit', [MarksController::class, 'MarksEdit'])->name('marks.entry.edit'); 
+        Route::post('marks/entry/store', [MarksController::class, 'MarksStore'])->name('marks.entry.store');
+        Route::get('entry/edit', [MarksController::class, 'MarksEdit'])->name('marks.entry.edit');
         Route::get('getstudents/edit', [MarksController::class, 'MarksEditGetStudents'])->name('student.edit.getstudents');
-        Route::post('entry/update', [MarksController::class, 'MarksUpdate'])->name('marks.entry.update');  
+        Route::post('entry/update', [MarksController::class, 'MarksUpdate'])->name('marks.entry.update');
 
 
-        // Marks Entry Grade 
-       Route::get('marks/grade/view', [GradeController::class, 'MarksGradeView'])->name('marks.entry.grade');
-       Route::get('marks/grade/add', [GradeController::class, 'MarksGradeAdd'])->name('marks.grade.add');
-       Route::post('marks/grade/store', [GradeController::class, 'MarksGradeStore'])->name('store.marks.grade');
-       Route::get('marks/grade/edit/{id}', [GradeController::class, 'MarksGradeEdit'])->name('marks.grade.edit');
-       Route::post('marks/grade/update/{id}', [GradeController::class, 'MarksGradeUpdate'])->name('update.marks.grade');
+        // Marks Entry Grade
+        Route::get('marks/grade/view', [GradeController::class, 'MarksGradeView'])->name('marks.entry.grade');
+        Route::get('marks/grade/add', [GradeController::class, 'MarksGradeAdd'])->name('marks.grade.add');
+        Route::post('marks/grade/store', [GradeController::class, 'MarksGradeStore'])->name('store.marks.grade');
+        Route::get('marks/grade/edit/{id}', [GradeController::class, 'MarksGradeEdit'])->name('marks.grade.edit');
+        Route::post('marks/grade/update/{id}', [GradeController::class, 'MarksGradeUpdate'])->name('update.marks.grade');
     });
 
-        Route::get('marks/getsubject', [DefaultController::class, 'GetSubject'])->name('marks.getsubject');
-        Route::get('student/marks/getstudents', [DefaultController::class, 'GetStudents'])->name('student.marks.getstudents');
+    Route::get('marks/getsubject', [DefaultController::class, 'GetSubject'])->name('marks.getsubject');
+    Route::get('student/marks/getstudents', [DefaultController::class, 'GetStudents'])->name('student.marks.getstudents');
+
+
+    // Account Management Routes
+    Route::prefix('accounts')->group(function () {
+        Route::get('student/fee/view', [StudentFeeController::class, 'ViewStudentFee'])->name('student.fee.view');
+        Route::get('student/fee/add', [StudentFeeController::class, 'AddStudentFee'])->name('student.fee.add');
+        Route::get('student/fee/getstudent', [StudentFeeController::class, 'StudentFeeGetStudent'])->name('account.fee.getstudent');
+        Route::post('student/fee/store', [StudentFeeController::class, 'StoreStudentFee'])->name('account.fee.store');
+
+
+        // Employee Salary Routes
+        Route::get('employee/salary/view', [AccountSalaryController::class, 'ViewEmployeeAccountSalary'])->name('account.salary.view');
+        Route::get('employee/salary/add', [AccountSalaryController::class, 'AddEditEmployeeAccountSalary'])->name('account.salary.add');
+        Route::get('employee/salary/getemployee', [AccountSalaryController::class, 'GetEmployeeAccountSalary'])->name('account.salary.getemployee');
+        Route::post('employee/salary/store', [AccountSalaryController::class, 'StoreAccountSalary'])->name('account.salary.store');
+
+        // Other Cost Routes
+        Route::get('other/cost/view', [OtherCostsController::class, 'ViewOtherCosts'])->name('other.cost.view');
+        Route::get('other/cost/add', [OtherCostsController::class, 'AddOtherCosts'])->name('other.cost.add');
+        Route::post('other/cost/store', [OtherCostsController::class, 'StoreOtherCosts'])->name('store.other.cost');
+        Route::get('other/cost/edit/{id}', [OtherCostsController::class, 'EditOtherCosts'])->name('edit.other.cost');
+        Route::post('other/cost/update/{id}', [OtherCostsController::class, 'UpdateOtherCosts'])->name('update.other.cost');
+    });
 }); //End of Auth middleware
