@@ -3,7 +3,7 @@
  @php
      $prefix = Request::route()->getPrefix();
      $route = Route::current()->getName();
-     
+
  @endphp
 
 
@@ -13,7 +13,7 @@
 
          <div class="user-profile">
              <div class="ulogo">
-                 <a href="index.html">
+                 <a href="/">
                      <!-- logo for regular state and mobile devices -->
                      <div class="d-flex align-items-center justify-content-center">
                          <img src="{{ asset('backend/images/logo-dark.png') }}" alt="">
@@ -141,6 +141,25 @@
                  </ul>
              </li>
 
+                <li class="treeview {{ $prefix == '/fetch' ? 'active' : '' }}">
+
+                 <a href="#">
+                     <i data-feather="edit-2"></i> <span>Fetch Details</span>
+                     <span class="pull-right-container">
+                         <i class="fa fa-angle-right pull-right"></i>
+                     </span>
+                 </a>
+                 <ul class="treeview-menu">
+                     <li class="{{ $route == 'marks.view' ? 'active' : '' }}"><a
+                             href="{{ route('marks.view') }}"><i class="ti-more"></i>Marks </a></li>
+                     <li class="{{ $route == 'fees.view' ? 'active' : '' }}"><a
+                             href="{{ route('fees.view') }}"><i class="ti-more"></i>Fee Details</a></li>
+
+
+
+                 </ul>
+             </li>
+
 
              <li class="treeview {{ $prefix == '/employees' ? 'active' : '' }}">
 
@@ -173,7 +192,7 @@
              </li>
 
 
-           
+
 
              <li class="treeview {{ $prefix == '/accounts' ? 'active' : '' }}">
 

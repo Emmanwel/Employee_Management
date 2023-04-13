@@ -44,8 +44,8 @@
                                                     class="ti-user"></i></span>
                                         </div>
                                         <input type="email" id="email" name="email"
-                                            class="form-control pl-15 bg-transparent text-white plc-white" required=""
-                                            placeholder="Email">
+                                            class="form-control pl-15 bg-transparent text-white plc-white"
+                                            required="" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -55,8 +55,8 @@
                                                     class="ti-lock"></i></span>
                                         </div>
                                         <input type="password" id="password" name="password"
-                                            class="form-control pl-15 bg-transparent text-white plc-white" required=""
-                                            placeholder="Password">
+                                            class="form-control pl-15 bg-transparent text-white plc-white"
+                                            required="" placeholder="Password">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -86,9 +86,9 @@
                                 <p class="gap-items-2 mb-20">
                                     <a class="btn btn-social-icon btn-round btn-outline btn-white mr-md-6"
                                         href="auth/redirect"><i class="fa fa-github mr-md-3">Github</i></a>
-                                    <a class="btn btn-social-icon btn-round btn-outline btn-white" href="auth/redirect"><i
-                                            class="fa fa-google-plus p-6">Google</i></a>
-                                    
+                                    <a class="btn btn-social-icon btn-round btn-outline btn-white"
+                                        href="auth/redirect"><i class="fa fa-google-plus p-6">Google</i></a>
+
                                 </p>
                             </div>
 

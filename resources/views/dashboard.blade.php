@@ -11,6 +11,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <x-welcome />
                 <h1>Laravel intends ti empiwe</h1>
+                   <h1>Laravel intends ti empiwe</h1>
             </div>
         </div>
     </div>

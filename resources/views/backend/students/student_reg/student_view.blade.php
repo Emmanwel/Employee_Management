@@ -50,7 +50,8 @@
                                                         @foreach ($classes as $class)
                                                             <option value="{{ $class->id }}" {{-- The CLASS must be equal to class_ID --}}
                                                                 {{ @$class_id == $class->id ? 'selected' : '' }}>
-                                                                {{ $class->name }}</option>
+                                                                {{ $class->name }}
+                                                            </option>
                                                         @endforeach
 
                                                     </select>
@@ -226,3 +227,5 @@
     </div>
 
 @endsection
+
+

@@ -48,10 +48,10 @@
 
 
             <td>
-                <h2>Easy School ERP</h2>
-                <p>School Address</p>
-                <p>Phone : 343434343434</p>
-                <p>Email : support@easylerningbd.com</p>
+                <h2>Mahjong School Management System </h2>
+                <p>Mfangano Lane 2345-0088</p>
+                <p>Phone : +254704576324</p>
+                <p>Email : emmanuelmukhebi5@gmail.com</p>
                 <p> <b> Student Exam Fee</b> </p>
             </td>
         </tr>

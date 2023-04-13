@@ -23,6 +23,7 @@ use App\Http\Controllers\Backend\Header\CalendarController;
 use App\Http\Controllers\Backend\Setup\FeeAmountController;
 use App\Http\Controllers\Backend\Setup\LeaveTypeController;
 use App\Http\Controllers\Backend\Student\ExamFeeController;
+use App\Http\Controllers\Backend\Payments\PaymentController;
 use App\Http\Controllers\Backend\Setup\DesignationController;
 use App\Http\Controllers\Backend\Setup\FeeCategoryController;
 use App\Http\Controllers\Backend\Setup\StudentYearController;
@@ -257,7 +258,7 @@ Route::group(['middleware'  => 'auth', 'verified'], function () {
         Route::post('student/class/store', [StudentClassController::class, 'StoreStudentClass'])->name('store.student.class');
         Route::get('student/class/edit/{id}', [StudentClassController::class, 'EditStudentClass'])->name('student.class.edit');
         Route::post('student/class/update/{id}', [StudentClassController::class, 'UpdateStudentClass'])->name('update.student.class');
-        Route::get('student/class/update/{id}', [StudentClassController::class, 'DeleteStudentClass'])->name('delete.student.class');
+        Route::get('student/class/delete/{id}', [StudentClassController::class, 'DeleteStudentClass'])->name('delete.student.class');
 
         //Student Year Routes
 
@@ -479,5 +480,33 @@ Route::group(['middleware'  => 'auth', 'verified'], function () {
         Route::post('other/cost/store', [OtherCostsController::class, 'StoreOtherCosts'])->name('store.other.cost');
         Route::get('other/cost/edit/{id}', [OtherCostsController::class, 'EditOtherCosts'])->name('edit.other.cost');
         Route::post('other/cost/update/{id}', [OtherCostsController::class, 'UpdateOtherCosts'])->name('update.other.cost');
+    });
+
+
+    //Payment routes
+    Route::prefix('payments')->group(function () {
+        Route::get('generateAccessToken', [PaymentController::class, 'generateAccessToken'])->name('generateAccessToken');
+        // Route::get('initiatepush', [PaymentController::class, 'initiateStkPush'])->name('initiatepush');
+        Route::post('stkcallback', [PaymentController::class, 'stkCallback'])->name('stkcallback');
+        Route::get('stkquery', [PaymentController::class, 'stkQuery'])->name('stkquery');
+        Route::get('registerurl', [PaymentController::class, 'registerUrl'])->name('registerurl');
+        Route::post('validation', [PaymentController::class, 'Validation'])->name('validation');
+        Route::post('confirmation', [PaymentController::class, 'Confirmation'])->name('confirmation');
+        Route::get('simulate', [PaymentController::class, 'Simulate'])->name('simulate');
+        Route::get('qrcode', [PaymentController::class, 'QRCode'])->name('qrcode');
+        Route::get('b2c', [PaymentController::class, 'b2c'])->name('b2c');
+        Route::post('b2cresult', [PaymentController::class, 'b2cResult'])->name('b2cresult');
+        Route::post('b2ctimeout', [PaymentController::class, 'b2cTimeout'])->name('b2ctimeout');
+    });
+
+
+    Route::prefix('fetch')->group(function () {
+        Route::get('student/marks', [MarksController::class, 'marks'])->name('marks.view');
+        Route::get('student/fees', [StudentRegController::class, 'showFees'])->name('fees.view');
+
+        Route::get('payment/fees', [PaymentController::class, 'initiateStkPush'])->name('simulate');
+
+
+        // Route::get('payments/fees', [PaymentController::class, 'FeesPayments'])->name('simulate');
     });
 }); //End of Auth middleware
