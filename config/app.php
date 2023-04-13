@@ -69,7 +69,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    //'timezone' => 'UTC',
+    'timezone' => 'Africa/Nairobi',
 
     /*
     |--------------------------------------------------------------------------
@@ -182,7 +183,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-       
+
 
 
 
@@ -205,7 +206,7 @@ return [
 
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-       
+
 
 
 

@@ -23,8 +23,10 @@ use App\Models\StudentShift;
 use Illuminate\Http\Request;
 use App\Models\DiscountStudent;
 use App\Models\RegisterStudent;
+use App\Models\FeeCategoryAmount;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 
 class StudentRegController extends Controller
@@ -324,5 +326,25 @@ class StudentRegController extends Controller
         //$pdf = PDF::loadView('backend.students.student_reg.student_details_pdf', $data);
         //$pdf->SetProtection(['copy', 'print'], '', 'pass');
         return $pdf->stream('document.pdf');
+    } //
+
+
+
+    public function showFees()
+    {
+        //  $studentMarks = StudentMarks::where('student_id', $students->id)->with('assignSubject.subject')->orderBy('id', 'desc')->get();
+
+        $student = Auth::user();
+        //$feeCategoryAmounts = $student->grade->feeCategoryAmounts()->with('feeCategory')->get();
+
+        // load the related fee category
+        $feeCategoryAmounts = FeeCategoryAmount::where('class_id', $student->id)->with('feeCategory')->orderBy('id', 'desc')->get();
+
+        // dd($feeCategoryAmounts);
+
+        // Calculate the total amount of fees for the class
+        $totalAmount = $feeCategoryAmounts->sum('amount');
+
+        return view('backend.details.fees_view', compact('feeCategoryAmounts', 'totalAmount'));
     }
 }

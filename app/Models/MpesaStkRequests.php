@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subject extends Model
+class MpesaStkRequests extends Model
 {
     use HasFactory;
-
-    public function assignSubjects()
-    {
-        return $this->hasMany(AssignSubject::class);
-    }
 }

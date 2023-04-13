@@ -45,5 +45,10 @@ class RegisterStudent extends Model
         return $this->belongsTo(StudentShift::class, 'shift_id', 'id');
     }
 
+    //R/ship between student model and Grade
 
+    public function grade()
+    {
+        return $this->belongsTo(StudentClass::class);
+    }
 }

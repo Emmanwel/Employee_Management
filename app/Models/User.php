@@ -31,6 +31,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'google_id',
     ];
 
     /**
@@ -72,4 +73,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(EmployeeSallaryLog::class, 'employee_id', 'salary');
     }
-} 
+    
+}

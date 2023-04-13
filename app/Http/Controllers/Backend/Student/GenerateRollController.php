@@ -11,12 +11,14 @@ use App\Http\Controllers\Controller;
 class GenerateRollController extends Controller
 {
     //
-    public function GenerateRollView()
+    public function StudentRollView()
     {
         $data['years'] = StudentYear::all();
         $data['classes'] = StudentClass::all();
         return view('backend.students.roll_generate.roll_generate_view', $data);
     } //End
+
+
     public function GetStudents(Request $request)
     {
         //dd('view an array of data');
@@ -49,8 +51,8 @@ class GenerateRollController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('view.generated.roll')->with($notification);
-    } // end Method 
+        return redirect()->route('roll.generate.view')->with($notification);
+    } // end Method
 
 
 }
